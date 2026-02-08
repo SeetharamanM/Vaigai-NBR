@@ -1,13 +1,16 @@
 """
 Vaigai North Bank Road Project — RCC Retaining Wall Progress (Streamlit)
 Month-wise overall length progress and balance to be completed by March 2026.
+No-wall portions are deducted from total estimated and from completed length.
 Run: streamlit run app_progress.py
 """
+import re
 import streamlit as st
 import pandas as pd
 from pathlib import Path
 import plotly.graph_objects as go
 import plotly.express as px
+
 st.set_page_config(
     page_title="RCC RW Progress — Vaigai North Bank",
     page_icon="📊",
@@ -17,6 +20,57 @@ st.set_page_config(
 
 EXCEL_PATH = Path(__file__).parent / "RCC RW data.xlsx"
 TARGET_MONTH = "2026-03"  # March 2026
+
+
+def parse_stretch(stretch_str):
+    """Parse 'start-end' to (start, end) in meters. Returns (None, None) if invalid."""
+    if pd.isna(stretch_str) or not str(stretch_str).strip() or str(stretch_str).strip() == "nan":
+        return None, None
+    match = re.match(r"^\s*(\d+(?:\.\d+)?)\s*[-–]\s*(\d+(?:\.\d+)?)\s*$", str(stretch_str).strip())
+    if not match:
+        return None, None
+    try:
+        start = int(float(match.group(1)))
+        end = int(float(match.group(2)))
+        if start <= end:
+            return start, end
+    except (ValueError, TypeError):
+        pass
+    return None, None
+
+
+def get_no_wall_ranges(df):
+    """Return list of (start, end) for chainage marked as no wall (Item 'No wall' or Mbook 'wall'). Merged and sorted."""
+    rows = df[
+        (df["Item"].astype(str).str.strip().str.lower() == "no wall")
+        | (df["Mbook"].astype(str).str.strip().str.lower() == "wall")
+    ]
+    intervals = []
+    for _, row in rows.iterrows():
+        start, end = parse_stretch(row.get("Stretch"))
+        if start is not None and end is not None:
+            intervals.append((start, end))
+    if not intervals:
+        return []
+    intervals = sorted(intervals)
+    merged = [list(intervals[0])]
+    for s, e in intervals[1:]:
+        if s <= merged[-1][1]:
+            merged[-1][1] = max(merged[-1][1], e)
+        else:
+            merged.append([s, e])
+    return [tuple(x) for x in merged]
+
+
+def length_in_no_wall(start, end, no_wall_ranges):
+    """Return total length of [start, end) that falls inside any no-wall range."""
+    total = 0
+    for a, b in no_wall_ranges:
+        overlap_start = max(start, a)
+        overlap_end = min(end, b)
+        if overlap_end > overlap_start:
+            total += overlap_end - overlap_start
+    return total
 
 
 @st.cache_data
@@ -44,14 +98,33 @@ def main():
     valid_dates["Month"] = valid_dates["Date"].dt.to_period("M").astype(str)
     valid_dates["MonthDate"] = valid_dates["Date"].dt.to_period("M").dt.to_timestamp()
 
-    # Total estimated length (linear m)
-    total_est = valid_dates.groupby("Estimate")["Est_Length"].first().sum()
+    # No-wall portions: deduct from total and from completed length
+    no_wall_ranges = get_no_wall_ranges(df)
+    no_wall_total = sum(b - a for a, b in no_wall_ranges)
 
-    # Month-wise completed length: use Earthwork as reference for linear metres
+    # Total estimated length (linear m), then deduct no-wall
+    total_est = valid_dates.groupby("Estimate")["Est_Length"].first().sum()
+    total_est_effective = max(0, total_est - no_wall_total)
+
+    # Month-wise completed length (Earthwork), deducting no-wall portion from each stretch
+    earthwork = valid_dates[valid_dates["Item"] == "Earthwork"].copy()
+    if len(earthwork) > 0:
+        effective_lengths = []
+        for _, row in earthwork.iterrows():
+            start, end = parse_stretch(row.get("Stretch"))
+            if start is None or end is None:
+                effective_lengths.append(row["Length"] or 0)
+                continue
+            stretch_len = end - start
+            deduct = length_in_no_wall(start, end, no_wall_ranges)
+            effective_lengths.append(max(0, stretch_len - deduct))
+        earthwork["effective_length"] = effective_lengths
+    else:
+        earthwork["effective_length"] = []
+
     monthly = (
-        valid_dates[valid_dates["Item"] == "Earthwork"]
-        .groupby("Month")
-        .agg(completed=("Length", "sum"))
+        earthwork.groupby("Month")
+        .agg(completed=("effective_length", "sum"))
         .reset_index()
         .sort_values("Month")
     )
@@ -62,7 +135,7 @@ def main():
     monthly["MonthDate"] = pd.to_datetime(monthly["Month"] + "-01")
     monthly["Cumulative"] = monthly["completed"].cumsum()
     total_completed = monthly["Cumulative"].iloc[-1]
-    balance = max(0, total_est - total_completed)
+    balance = max(0, total_est_effective - total_completed)
 
     # Months remaining to March 2026 (from last data month)
     last_month = monthly["Month"].iloc[-1]
@@ -76,18 +149,20 @@ def main():
         required_per_month = 0
 
     st.title("Vaigai North Bank Road Project")
-    st.caption("RCC Retaining Wall — Overall length progress (month-wise)")
+    st.caption("RCC Retaining Wall — Overall length progress (month-wise). **No-wall portions deducted** from total and completed.")
 
-    # KPIs
+    # KPIs (all use effective total = total_est - no_wall)
     col1, col2, col3, col4, col5 = st.columns(5)
-    col1.metric("Total estimated (m)", f"{total_est:,.0f}")
+    col1.metric("Total estimated (m)", f"{total_est_effective:,.0f}")
     col2.metric("Completed (m)", f"{total_completed:,.0f}")
     col3.metric("Balance to complete by Mar 2026 (m)", f"{balance:,.0f}")
-    col4.metric("Progress", f"{(total_completed / total_est * 100):.1f}%" if total_est else "—")
+    col4.metric("Progress", f"{(total_completed / total_est_effective * 100):.1f}%" if total_est_effective else "—")
     if months_left > 0 and balance > 0:
         col5.metric("Required per month to target (m)", f"{required_per_month:,.0f}")
     else:
         col5.metric("Months to Mar 2026", str(months_left) if months_left else "—")
+    if no_wall_total > 0:
+        st.caption("No-wall portion **{:,.0f} m** deducted from total estimated and from completed length.".format(no_wall_total))
 
     st.divider()
 
@@ -123,15 +198,15 @@ def main():
             )
         )
     fig.add_hline(
-        y=total_est,
+        y=total_est_effective,
         line_dash="dash",
         line_color="gray",
-        annotation_text="Total estimated",
+        annotation_text="Total estimated (excl. no-wall)",
     )
     # Progress percentage on top of each bar
-    if total_est and total_est > 0:
+    if total_est_effective and total_est_effective > 0:
         for i in range(n_months):
-            pct = cumulative[i] / total_est * 100
+            pct = cumulative[i] / total_est_effective * 100
             fig.add_annotation(
                 x=month_dates[i],
                 y=cumulative[i],
@@ -153,11 +228,31 @@ def main():
     fig.update_xaxes(tickangle=0)
     st.plotly_chart(fig, use_container_width=True)
 
-    # Optional: show data table
-    with st.expander("Month-wise data"):
-        show_df = monthly[["Month", "completed", "Cumulative"]].copy()
-        show_df.columns = ["Month", "Monthly completed (m)", "Cumulative (m)"]
-        st.dataframe(show_df, use_container_width=True, hide_index=True)
+    # Monthly progress: Length (x-axis), Month (y-axis), show length and % completed per month
+    st.subheader("Monthly progress — Length by month")
+    monthly["pct_of_total"] = (monthly["completed"] / total_est_effective * 100).round(1) if total_est_effective and total_est_effective > 0 else 0
+    monthly["month_label"] = monthly["MonthDate"].dt.strftime("%b %Y")
+    fig_monthly = go.Figure()
+    fig_monthly.add_trace(
+        go.Bar(
+            y=monthly["month_label"],
+            x=monthly["completed"],
+            orientation="h",
+            marker_color="steelblue",
+            text=[f"{v:,.0f} m ({p:.1f}%)" for v, p in zip(monthly["completed"], monthly["pct_of_total"])],
+            textposition="outside",
+            textfont=dict(size=11),
+        )
+    )
+    fig_monthly.update_layout(
+        height=max(320, len(monthly) * 28),
+        margin=dict(l=80),
+        xaxis_title="Length (m)",
+        yaxis_title="Month",
+        yaxis=dict(autorange="reversed"),
+        title="Length completed and % of total estimated in each month",
+    )
+    st.plotly_chart(fig_monthly, use_container_width=True)
 
 
 if __name__ == "__main__":
