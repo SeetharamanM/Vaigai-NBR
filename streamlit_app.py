@@ -11,6 +11,12 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# Only Home page — no sidebar links to Mbook, Progress, Overlap Gap, Timeline
-pg = st.navigation([st.Page("Home.py", title="Home", default=True)])
+# Side navigation with all pages
+pg = st.navigation([
+    st.Page("Home.py", title="Home", icon="🛣️", default=True),
+    st.Page("Pages/1_📒_Mbook.py", title="Mbook", icon="📒"),
+    st.Page("Pages/2_📊_Progress.py", title="Progress", icon="📊"),
+    st.Page("Pages/3_📐_Overlap_Gap.py", title="Overlap & Gap", icon="📐"),
+    st.Page("Pages/4_📈_Timeline.py", title="Timeline", icon="📈"),
+])
 pg.run()
