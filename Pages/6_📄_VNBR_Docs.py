@@ -59,9 +59,9 @@ df = pd.DataFrame(
     columns=["Sl.No", "Date", "Document", "Details", "Department"],
 )
 
-# Sidebar: link back to Vaigai NBR (Static) and optional document download
+# Sidebar: document download
 with st.sidebar:
-    st.page_link("Pages/5_📄_VaigaiNBR_Static.py", label="← Vaigai NBR (Project Details)", icon="📄")
+    st.caption("Use the sidebar above to open **Vaigai NBR (Static)** for project details.")
     st.divider()
     st.caption("**Download a document** (PDFs from Vaigai NBR folder)")
     docs_with_file = [(r[0], r[2], r[5]) for r in DOCS if r[5]]

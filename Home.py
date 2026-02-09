@@ -12,8 +12,4 @@ st.markdown("""
 Welcome to the Vaigai North Bank Road Project dashboard.
 """)
 
-# Link to static web page in side navigation
-with st.sidebar:
-    st.page_link("Pages/5_📄_VaigaiNBR_Static.py", label="Vaigai NBR (Static page)", icon="📄")
-
 st.info("Data source: **RCC RW data.xlsx** (sheet: RCC RW)")

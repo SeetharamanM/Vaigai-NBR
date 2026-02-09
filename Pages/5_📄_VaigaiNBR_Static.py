@@ -20,10 +20,6 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# Sidebar: link to VNBR Documents sub-page
-with st.sidebar:
-    st.page_link("Pages/6_📄_VNBR_Docs.py", label="VNBR Documents", icon="📋")
-
 st.title("Vaigai North Bank Road Details")
 
 # ---------- Estimate Details ----------
