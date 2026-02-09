@@ -18,5 +18,7 @@ pg = st.navigation([
     st.Page("Pages/2_📊_Progress.py", title="Progress", icon="📊"),
     st.Page("Pages/3_📐_Overlap_Gap.py", title="Overlap & Gap", icon="📐"),
     st.Page("Pages/4_📈_Timeline.py", title="Timeline", icon="📈"),
+    st.Page("Pages/5_📄_VaigaiNBR_Static.py", title="Vaigai NBR (Static)", icon="📄"),
+    st.Page("Pages/6_📄_VNBR_Docs.py", title="VNBR Documents", icon="📋"),
 ])
 pg.run()

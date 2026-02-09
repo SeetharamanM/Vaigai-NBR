@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Vaigai North Bank Road</title>
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+        <link href="css/styles.css" rel="stylesheet" />
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <style>
+            a:link {
+            color: green;
+            background-color: transparent;
+            text-decoration: none;
+        }
+
+        a:visited {
+            color: pink;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: red;
+            text-decoration: underline;
+        }
+
+        a:active {
+            color: yellow;
+            text-decoration: underline;
+        }
+        </style>
+    </head>
+    <body id="thispage" class="sb-nav-fixed">
+                <nav class="sb-sidenav accordion sb-sidenav-dark text-white" style="background-color: #0A598A;" id="sidenavAccordion">
+                    <nav class="sb-topnav navbar navbar-expand navbar-dark text-white" style="background-color: #0A598A;">
+            <!-- Navbar Brand-->
+            <a class="navbar-brand ps-3" href="index.html">Usilampatti Highways</a>
+            <!-- Sidebar Toggle-->
+            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+            <!-- Navbar Search-->
+            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+                <div class="input-group">
+                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+                </div>
+            </form>
+            <!-- Navbar-->
+            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#!">Settings</a></li>
+                        <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li><a class="dropdown-item" href="#!">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark text-white" style="background-color: #0d9984 " id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                            <div class="sb-sidenav-menu-heading">Index</div>
+                            <a class="nav-link" href="#thispage">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Work Detail
+                            </a>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                                Login
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                        Authentication
+                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                    </a>
+                                    <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link" href="login.html">Login</a>
+                                            <a class="nav-link" href="register.html">Register</a>
+                                            <a class="nav-link" href="password.html">Forgot Password</a>
+                                        </nav>
+                                    </div>
+                                    <!--<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
+                                        Error
+                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                    </a>
+                                    <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link" href="401.html">401 Page</a>
+                                            <a class="nav-link" href="404.html">404 Page</a>
+                                            <a class="nav-link" href="500.html">500 Page</a>
+                                        </nav>
+                                    </div>-->
+                                </nav>
+                            </div>
+                            <div class="sb-sidenav-menu-heading">Interface</div>
+                            <a class="nav-link collapsed" href="#estimate" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Estimate Details
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="#estimate">Name of Work</a>
+                                    <a class="nav-link" href="#estimate">Estimate Cost</a>
+                                    <a class="nav-link" href="#estimate">Sub Estimate</a>
+                                    <a class="nav-link" href="#estimate">LS Provisons</a>
+                                                                      
+                                </nav>
+                                                    
+                            </div>
+                            
+                            <a class="nav-link collapsed" href="#agreement" data-bs-toggle="collapse" data-bs-target="#collapseProjects" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Agreement Details
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseProjects" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="#agreement">Agreement Details</a>
+                                    <a class="nav-link" href="#agreemnet">Work Progress</a>
+                                       
+                                </nav>
+                                                    
+                            </div>
+                            <a class="nav-link collapsed" href="#noc" data-bs-toggle="collapse" data-bs-target="#landaqu" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Project Progress Details
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="landaqu" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="#events">Diary of Events</a>
+                                    <a class="nav-link" href="./Vaigai NBR/VNBR Docs.html">Documents</a>
+                                    
+                                       
+                                </nav>
+                                                    
+                            </div>
+                            <a class="nav-link collapsed" href="#tech" data-bs-toggle="collapse" data-bs-target="#tech" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Project Technical Details
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="tech" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="/VNBR RCC RW.html">RCC Retaining wall</a>
+                                    
+                                       
+                                </nav>
+                                                    
+                            </div>
+                            <div class="collapse" id="tech" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="./Vaigai NBR/QC Test Frqncy.html">Quality Control Tests</a>
+                                    
+                                       
+                                </nav>
+                                                    
+                            </div>
+                            
+                            
+
+                            <!--<div class="sb-sidenav-menu-heading">Addons</div>
+                            <a class="nav-link" href="charts.html">
+                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                Charts
+                            </a>
+                            <a class="nav-link" href="tables.html">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Tables
+                            </a>-->
+                        </div>
+                    </div>
+                    <div class="sb-sidenav-footer text-white" style="background-color: #0A598A">
+                        <div class="small">Logged in as:</div>
+                        Seetharaman
+                    </div>
+                </nav>
+            </div>
+            <div id="layoutSidenav_content">
+                <main>
+                    <div id="estimate" class="container-fluid px-4 bg-light">
+
+                        <h1 class="mt-2">Vaigai North Bank Road Details</h1>
+                        <div  class="col p-1 mb-2 text-white" style="background-color: #0A598A"><h4>Estimate Details</h4></div>
+                        <div class="row overflow-auto py-4 mb-2" style="height:400px" >
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-white text-black mb-4 shadow">
+                                    <div class="card-body">
+                                    <h4 >Name of work</h4>
+                                    <div class="card-text">
+                                        <p>
+                                         Construction of Vaigai North Bank Road Km 0/0-8/0 from Kamarajar Bridge to Varanasi-Kanniyakumari road (NH-44) near Samayanallur  
+                                        </p>
+                                        <p><i>CRIDP 2022-23</i></p>
+                                        <p><i>CE No. 139/2023-24   dt: 05.03.2024 </i></p>
+                                     
+                                    </div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                           <p><i>1. G.O.(Ms) No. 125, Highways & Minor Ports (HS1) Department, dated 12.07.2022 <br>
+                                           2. G.O.(Ms) No. 32, Highways & Minor Ports (HS2) Department, dated 04.03.2024</i></p>                                           
+                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                    </div>
+                                    
+                                </div>
+                                
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-white text-black mb-4 shadow">
+                                    <div class="card-body">
+                                    <h4 >Cost Details</h4>
+                                    <div class="card-text">
+                                        <table class="table table-striped">
+                                            <tr>
+                                            <td>Estimate Amount</td> <td>Rs 176 Crore</td>
+                                            </tr>
+                                            <tr>
+                                            <td>Road Work</td> <td>Rs 42,61,26,130</td>
+                                            </tr>
+                                            <tr>
+                                            <td>Sub Estimates</td> <td>Rs 90,25,52,352</td>
+                                            </tr>
+                                            <tr>
+                                            <td>Total Amount</td> <td>Rs 132,86,78,488</td>
+                                            </tr>
+                                            <tr>
+                                            <td>GST 18%</td> <td>Rs 23,91,62,128</td>
+                                            </tr>
+                                            <tr>
+                                            <td>LS Provisions</td> <td>Rs 19,21,59,384</td>
+                                            </tr>
+                                            </table>
+                                    </div>
+                                    </div>
+                                    
+                                </div>
+                                
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-white text-black mb-4 shadow">
+                                    <div class="card-body">
+                                    <h4 >Sub Estimates</h4>
+                                    <div class="card-text">
+                                        <table class="table table-striped">
+                                            <tr>
+                                            <td>Minor Bridge Km 2/850</td> <td>Rs 2,04,66,248</td>
+                                            </tr>
+                                            <tr>
+                                            <td>Minor Bridge Km 6/200</td> <td>Rs 1,77,13,525</td>
+                                            </tr>
+                                            <tr>
+                                            <td>Box Culverts (11 Nos)</td> <td>Rs 1,47,88,836</td>
+                                            </tr>
+                                            <tr>
+                                            <td>PCC Retaining wall (450 M)</td> <td>Rs 2,02,33,026</td>
+                                            </tr>
+                                            <tr>
+                                            <td>RCC Retaining wall (7805 M)</td> <td>Rs 76,87,54,660</td>
+                                            </tr>
+                                            <tr>
+                                            <td>Raised Foot Path (8000 M)</td> <td>Rs 6,05,96,063</td>
+                                            </tr>
+                                            </table>
+                                    </div>
+                                    </div>
+                                    
+                                </div>
+                                
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-white text-black mb-4 shadow">
+                                    <div class="card-body">
+                                    <h4 >LS Provisions</h4>
+                                    <div class="card-text">
+                                        <table class="table table-striped">
+                                            <tr>
+                                            <td>Labour Welfare Fund</td> <td>Rs 1,56,78,407</td>
+                                            </tr>
+                                            <tr>
+                                            <td>Quality Control Charges</td> <td>Rs 1,56,79,000</td>
+                                            </tr>
+                                            <tr>
+                                            <td>Escalation Provision</td> <td>Rs 7,83,93,000</td>
+                                            </tr>
+                                            <tr>
+                                            <td>Advertisement Charges</td> <td>Rs 8,00,000</td>
+                                            </tr>
+                                            <tr>
+                                            <td>Road Furnitures</td> <td>Rs 1,45,00,000</td>
+                                            </tr>
+                                            <tr>
+                                            <td>Shifting of Utilities</td> <td>Rs 50,00,000</td>
+                                            </tr>
+                                            <tr>
+                                            <td>Land Acquisition</td> <td>Rs 3,00,00,000</td>
+                                            </tr>
+                                            <tr>
+                                            <td>Road Safety Audit</td> <td>Rs 15,00,000</td>
+                                            </tr>
+                                            <tr>
+                                            <td>Turfing & Tree Plantation</td> <td>Rs 28,00,000</td>
+                                            </tr>
+                                            <tr>
+                                            <td>Staicase Provision</td> <td>Rs 1,00,00,000</td>
+                                            </tr>
+                                            <tr>
+                                            <td>Protective wall for Existing Water Pipe Line</td> <td>Rs 80,00,000</td>
+                                            </tr>
+                                            <tr>
+                                            <td>PS and Contigencies</td> <td>Rs 98,08,977</td>
+                                            </tr>
+                                                      
+                                            </table>
+                                    </div>
+                                    </div>
+                                    
+                                </div>
+                                
+                            </div>
+                                               
+                        </div>
+                        <div id="agreement" class="col p-1 mb-2 text-white" style="background-color: #0A598A"><h4 >Agreement Details</h4></div>
+                        <div class="row overflow-auto py-4 mb-2" style="height:400px">
+                            <div class="col-xl-6 col-md-6">
+                                <div class="card bg-white text-black mb-4 shadow">
+                                    <div class="card-body">
+                                    <h4 >Agreement Details</h4>
+                                    <div class="card-text">
+                                        <table class="table table-striped">
+                                            <tr>
+                                            <td>Contractor</td> <td>M/s Notch India Projects, Madurai</td>
+                                            </tr>
+                                            <tr>
+                                            <td>Tender Date</td> <td>03.05.2024</td>
+                                            </tr>
+                                            <tr>
+                                            <td>Tender opening</td> <td></td>
+                                            </tr>
+                                            <tr>
+                                             <td>COT Proceddings</td> <td>13.06.2024</td>
+                                            </tr>
+                                            <tr>
+                                            <td>Work Order</td> <td>14.06.2024</td>
+                                            </tr>
+                                            <tr>
+                                            <td>C.R. Agreement No.2/2024-25</td> <td>28.06.2024</td>
+                                            </tr>
+                                            <tr>
+                                            <td>Contract Value</td> <td>Rs 165,89,31,278</td>
+                                            </tr>
+                                            <tr>
+                                            <td>Tender %</td> <td>5.81% above ER 2023-24</td>
+                                            </tr>
+                                            <tr>
+                                            <td>Period</td> <td>20 months</td>
+                                            </tr>
+                                            <tr>
+                                            <td>Agt completion Date</td> <td>27.02.2026</td>
+                                            </tr>
+                                            <tr>
+                                            <td>EOT Upto</td> <td></td>
+                                            </tr>
+                                        </table>
+
+                                    </div>
+                                    
+                                    </div>
+                                    
+                                </div>
+                                
+                            </div>
+                            <div class="col-xl-6 col-md-6">
+                                <div class="card bg-white text-black mb-4 shadow">
+                                    <div class="card-body">
+                                    <h4 >Work Progress</h4>
+                                    <div class="card-text">
+                                        <table class="table table-striped">
+                                            <tr>
+                                            <td>Road Work</td> <td>32.07%</td>
+                                            <td><span class="badge bg-success">0% Done</span></td>
+                                            </tr>
+                                            <tr>
+                                            <td>Minor Bridge @ Km 2/850</td> <td>1.54%</td>
+                                            <td><span class="badge bg-success">0% Done</span></td>
+                                            </tr>
+                                            <tr>
+                                            <td>Minor Bridge @ Km 6/200</td> <td>1.33%</td>
+                                            <td><span class="badge bg-success">0% Done</span></td>
+                                            </tr>
+                                            <tr>
+                                            <td>Box Culverts (11 Nos)</td> <td>1.11%</td>
+                                            <td><span class="badge bg-success">0% Done</span></td>
+                                            </tr>
+                                            <tr>
+                                            <td>PCC Retaining Wall (450 M)</td> <td>1.52%</td>
+                                            <td><span class="badge bg-success">0% Done</span></td>
+                                            </tr>
+                                            <tr>
+                                            <td>RCC Retaining Wall (7805 M)</td> <td>57.86%</td>
+                                            <td><span class="badge bg-success">0% Done</span></td>
+                                            </tr>
+                                            <tr>
+                                            <td>Raised Foot Path (8000 M)</td> <td>4.56%</td>
+                                            <td><span class="badge bg-success">0% Done</span></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    </div>
+                                    
+                                </div>
+                                
+                            </div>
+                            
+                            
+                                               
+                        </div>
+                        <div id="noc" class="col text-white p-1 mb-2" style="background-color: #0A598A"><h4 class="mt-1">Project NOC Details</h4></div>
+                        <div class="row overflow-auto py-4 mb-2" style="height:400px">
+                        
+                            <div id="wrd events" class="col-xl-6 col-md-6">
+                                <div class="card bg-white text-black mb-4 shadow">
+                                    <div class="card-body">
+                                    <h4 >Diary of Events (WRD NOC)</h4>
+                                    <div class="card-text">
+                                        <table class="table table-striped">
+                                            <tr>
+                                            <td>Sl.No</td> <td>Date</td><td>Events</td>
+                                            </tr>
+                                            <tr>
+                                            <td>1</td> <td>21.02.2022</td><td>Hon'ble CM Announcement in Govt. function at Madurai</td>
+                                            </tr>
+                                            <tr>
+                                            <td>2</td> <td>12.07.2022</td><td>GO (Ms) No. 125, Highways and Minor Ports (HS1) Dept for Administrative Sanction of Rs 95.94 Crore</td>
+                                            </tr>
+                                            <tr>
+                                            <td>3</td> <td>20.02.2023</td><td>Letter to SE, WRD Vaigai basin requested joint inspection</td>
+                                            </tr>
+                                            <tr>
+                                            <td>4</td> <td>21.02.2023</td><td>Joint inspection by SE, WRD and SE (H) C&M for NOC</td>
+                                            </tr>
+                                            <tr>
+                                            <td>5</td> <td>28.02.2023</td><td>Letter from SE, WRD Vaigai basin recommending construction of Retaining wall along Riverr bund</td>
+                                            </tr>
+                                            <tr>
+                                            <td>6</td> <td>30.03.2023</td><td>RAS Proposal to CE (H) C&M for obtaining RAS for Rs 176 Crore</td>
+                                            </tr>
+                                            <tr>
+                                            <td>7</td> <td>06.04.2023</td><td>Requisition letter to SE, WRD for NOC</td>
+                                            </tr>
+                                            <tr>
+                                            <td>8</td> <td>04.03.2024</td><td>GO (Ms) No.32, Highways and Minor Ports (HS1) Dept for Revised Administrative Sanction of Rs 176.00 Crore</td>
+                                            </tr>
+                                            <tr>
+                                            <td>9</td> <td>05.03.2024</td><td>Technical Sanction by CE (H) C&M for Rs 176.00 Crore</td>
+                                            </tr>
+                                            <tr>
+                                            <td>10</td> <td>05.04.2024</td><td> Site Inspection by SE, WRD with DE (H) C&M for NOC and requested to mark the alignment of proposed road and River boundary</td>
+                                            </tr>
+                                            <tr>
+                                            <td>11</td> <td>11.07.2024</td><td>Site inspection by SE, WRD with Highways officials for NOC</td>
+                                            </tr> 
+                                            <tr>
+                                            <td>12</td> <td>11.07.2024</td><td>Letter from SE, WRD requested marking of Retaining wall alignment with pegs along whole stretch of proposed road</td>
+                                            </tr> 
+                                            <tr>
+                                            <td>13</td> <td>16.07.2024</td><td>Site inspection by SE, WRD and DE (H) C&M along with officials for NOC</td>
+                                            </tr> 
+                                            <tr>
+                                            <td>14</td> <td>23.07.2024</td><td>Inevitability Certificate obtained from the District Collector, Madurai</td>
+                                            </tr> 
+                                            <tr>
+                                            <td>15</td> <td>23.07.2024</td><td>Site inspection by SE (H) C&M</td>
+                                            </tr>   
+                                            <tr>
+                                            <td>16</td> <td>29.07.2024</td><td>Site inspection by SE, WRD on opposite bank for Vaigai North Bank road NOC</td>
+                                            </tr>
+                                            <tr>
+                                            <td>17</td> <td>21.08.2024</td><td>Chief Engineer, WRD  Superintending Engineer, WRD, Divisional Engineer (H) C&M Joint Inspection for NOC</td>
+                                            </tr>
+                                            <tr>
+                                             <td>18</td> <td>21.08.2024</td><td>Letter from CE, WRD, Madurai to Engineer-in-Chief, Chennai recommending for NOC</td>
+                                             </tr>
+                                            <tr>
+                                            <td>19</td> <td>23.08.2024</td><td>Letter from Engineer-in-Chief, Chennai to The Secretary WRD recommending for NOC</td>
+                                            </tr>
+                                            <tr>
+                                            <td>20</td> <td>06.09.2024</td><td>Letter from Engineer-in-Chief, Chennai to The Secretary WRD for justification regarding NOC queries.</td>
+                                            </tr>
+                                            <tr>
+                                            <td>21</td> <td>11.09.2024</td><td>NOC GO from WRD, G.O.(4D) No. 45/Water Resources (R2) Department, dated : 11.09.2024</td>
+                                            </tr>
+                                            <tr>
+                                            <td>23</td> <td>28.10.2024</td><td>Site inspection by  EE, AEE & AE, WRD with ADE, AE , Highways and Contractors for Alignment </td>
+                                            </tr>
+                                        </table>
+
+                                    </div>
+                                    
+                                    </div>
+                                    
+                                </div>
+                                
+                            </div>
+                            <div id="nhai events" class="col-xl-6 col-md-6">
+                                <div class="card bg-white text-black mb-4 shadow">
+                                    <div class="card-body">
+                                        <h4 >Diary of Events (NHAI NOC)</h4>
+                                        <div class="card-text">
+                                            <table class="table table-striped">
+                                                <tr>
+                                                <td>Sl.No</td> <td>Date</td><td>Events</td>
+                                                </tr>
+                                                <tr>
+                                                <td>1</td> <td>25.06.2024</td><td>Letter to PD, NHAI, Madurai requested NOC for connecting proposed road with NH-44 at Km 2/4 (Madurrai-Kayathar section)</td>
+                                                </tr>
+                                                <tr>
+                                                <td>2</td> <td>04.07.2024</td><td>Joint inspection of PD, NHAI and ADE (H) C&M</td>
+                                                </tr> 
+                                                <tr>
+                                                <td>3</td> <td>04.07.2024</td><td>Letter from PD, NHAI requesting compliance report tothe observations made during inspection</td>
+                                                </tr>   
+                                                <tr>
+                                                <td>4</td> <td>12.07.2024</td><td>Compliance report to observations and additional drawings to PD, NHAI</td>
+                                                </tr> 
+                                                <tr>
+                                                <td>5</td> <td>23.07.2024</td><td>Site inspection by SE (H) C&M</td><td></td>
+                                                </tr>    
+                                                <tr>
+                                                <td>6</td> <td>31.07.2024</td><td>Site inspection by CE (H) C&M, Chennai for proposed road alignment</td>
+                                                </tr>
+                                                <tr>
+                                                <td>7</td> <td>03.08.2024</td><td>Letter from PD, NHAI to RO, NHAI recommending for NOC</td>
+                                                </tr>
+                                                <tr>
+                                                <td>8</td> <td>18.09.2024</td><td>Letter From PD, NHAI, requesting deposit required Processing fee, Provisional fee & Licence fee for NOC</td>
+                                                </tr>  
+                                                <tr>
+                                                    <td>9</td> <td><a class="link" href="./Vaigai NBR/Lr.No.586.pdf" target="_blank" data-bs-toggle="tooltip" title="Click to see Document">09.04.2025</a></td><td>Letter From PD, NHAI, Communicating In-Principle NOC</td>
+                                                    </tr> 
+
+                                            </table>
+
+                                        </div>
+                                    
+                                    </div>
+                                    
+                                </div>
+                                
+                            </div>
+                        </div>    
+                        <div id="noc" class="col text-white p-1 mb-2" style="background-color: #0A598A"><h4 class="mt-1">Project LA Details</h4></div>
+                        <div class="row overflow-auto py-4 mb-2" style="height:400px">
+                        
+                            <div id="wrd events" class="col-xl-6 col-md-6">
+                                <div class="card bg-white text-black mb-4 shadow">
+                                    <div class="card-body">
+                                    <h4 >Diary of Events (LA)</h4>
+                                    <div class="card-text">
+                                        <table class="table table-striped">
+                                            <tr>
+                                            <td>Sl.No</td> <td>Date</td><td>Events</td>
+                                            </tr>
+                                            <tr>
+                                            <td>1</td> <td></td><td>LPS Submitted to DRO</td>
+                                            </tr>
+                                            <tr>
+                                            <td>2</td> <td></td><td>15(2) Notification sent to CLA</td>
+                                            </tr>
+                                            <tr>
+                                            <td>3</td> <td>30.01.2025</td><td>15(2) Notification Published in Newspapers</td>
+                                            </tr>
+                                            <tr>
+                                            <td>4</td> <td></td><td>15(1) notification sent to CLA</td>
+                                            </tr>
+                                            <tr>
+                                            <td>5</td> <td>03.06.2025</td><td>15(1) Notification Proposal approved by CLA</td>
+                                            </tr>
+                                            <tr>
+                                            <td>6</td> <td>23.06.2025</td><td>15(1) Notification Published in Gazzette No.</td>
+                                            </tr>
+                                            <tr>
+                                            <td>7</td> <td>29.07.2025</td><td>19(2) Enquiry conducted</td>
+                                            </tr>
+                                            <tr>
+                                            <td>8</td> <td>06.08.2025</td><td>19(3) sent to CLA for Approval</td>
+                                            </tr>
+                                            <tr>
+                                            <td>9</td> <td></td><td>19(3) Approved by CLA</td>
+                                            </tr>
+                                            <tr>
+                                            <td>10</td> <td>10.05.2025</td><td> 19(5) Enquiry Conducted</td>
+                                            </tr>
+                                            
+                                        </table>
+
+                                    </div>
+                                    
+                                    </div>
+                                    
+                                </div>
+                                
+                            </div>
+                            
+                        </div>    
+                        <div id="#" class="col p-1 mb-2 text-white" style="background-color: #0A598A"><h4 >Project Progress Details</h4></div>
+                        <div class="row overflow-auto py-4 mb-2" style="height:400px">
+                            <div id="nhai events" class="col-xl-6 col-md-6">
+                                <div class="card bg-white text-black mb-4 shadow">
+                                    <div class="card-body">
+                                    <h4 >Project Construction Events</h4>
+                                    <div class="card-text">
+                                        <table class="table table-striped">
+                                            <tr>
+                                            <td>Sl.No</td> <td>Date</td><td>Events</td>
+                                            </tr>
+                                            <tr>
+                                            <td>1</td> <td>21.02.2022</td><td>Hon'ble CM Announcement in Govt. function at Madurai</td>
+                                            </tr>
+                                            <tr>
+                                            <td>2</td> <td>12.07.2022</td><td>GO (Ms) No. 125, Highways and Minor Ports (HS1) Dept for Administrative Sanction of Rs 95.94 Crore</td>
+                                            </tr>
+                                            <tr>
+                                            <td>3</td> <td>30.03.2023</td><td>RAS Proposal to CE (H) C&M for obtaining RAS for Rs 176 Crore</td>
+                                            </tr>
+                                            <tr>
+                                            <td>4</td> <td>04.03.2024</td><td>GO (Ms) No.32, Highways and Minor Ports (HS1) Dept for Revised Administrative Sanction of Rs 176.00 Crore</td>
+                                            </tr>
+                                            <tr>
+                                            <td>5</td> <td>05.03.2024</td><td>Technical Sanction by CE (H) C&M for Rs 176.00 Crore</td>
+                                            </tr>
+                                            <tr>
+                                            <td>6</td> <td>28.06.2024</td><td>Agreement executed by Notch India Projects</td>
+                                            </tr>
+                                            <tr>
+                                            <td>7</td> <td>23.07.2024</td><td>Inevitability Certificate obtained from the District Collector, Madurai</td>
+                                            </tr> 
+                                            <tr>
+                                            <td>8</td> <td>23.07.2024</td><td>Site inspection by SE (H) C&M</td><td></td>
+                                            </tr>    
+                                            <tr>
+                                            <td>9</td> <td>29.07.2024</td><td>DE requested The Corporation Commissioner for Joint inspection for Pipeline and air valve chamber encountered along proposed road alignment </td><td></td>
+                                            </tr>
+                                            <tr>
+                                            <td>10</td> <td>31.07.2024</td><td>Site inspection by CE (H) C&M, Chennai for proposed road alignment</td><td></td>
+                                            </tr>
+                                            <tr>
+                                            <td>11</td> <td>23.08.2024</td><td>DE requested The District Collector, Madurai for Encroachment Eviction and River boundary survey in Vaigai North Bank.</td><td></td>
+                                            </tr>
+                                            <tr>
+                                            <td>12</td> <td>06.09.2024</td><td>Site Inspection by Deputy Secretary, Ministry of Youth Welfare and Sports Development </td><td></td>
+                                            </tr>
+                                            <tr>
+                                            <td>13</td> <td>27.09.2024</td><td>Letter from CE / TNPDCL,Madurai region requesting to get permission from TNEB </td><td></td>
+                                            </tr>
+                                        </table>
+
+                                    </div>
+                                    
+                                    </div>
+                                    
+                                </div>
+                                
+                            </div>
+                            
+                            
+                            
+                                               
+                        </div> 
+                            
+                    </div>
+                </main>
+                <footer class="py-4 mt-auto" style="background-color: #0A598A">
+                    <div class="container-fluid px-4">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-white">Copyright &copy; Your Website 2023</div>
+                            <div>
+                                <a href="#" class="text-white">Privacy Policy</a>
+                                &middot;
+                                <a href="#" class="text-white">Terms &amp; Conditions</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="js/scripts.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+        <script src="assets/demo/chart-area-demo.js"></script>
+        <script src="assets/demo/chart-bar-demo.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+        <script src="js/datatables-simple-demo.js"></script>
+    </body>
+</html>
