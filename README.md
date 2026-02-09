@@ -14,9 +14,9 @@ streamlit run streamlit_app.py
 1. **Sign in**: Go to [share.streamlit.io](https://share.streamlit.io) and sign in with GitHub.
 2. **Create app**: Click **Create app**.
 3. **Configure**:
-   - **Repository**: `SeetharamanM/VNBR`
+   - **Repository**: `SeetharamanM/Vaigai-NBR`
    - **Branch**: `main`
-   - **Main file path**: `streamlit_app.py`
+   - **Main file path**: **`streamlit_app.py`** (required — using `Home.py` will show only the home page with no sidebar navigation)
 4. **Deploy**: Click **Deploy**. The app will be available at `https://[your-app].streamlit.app` within a few minutes.
 
 ## Data
